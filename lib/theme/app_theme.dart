@@ -24,7 +24,6 @@ ThemeData buildTheme() {
       primary: AppColors.gold,
       secondary: AppColors.rose,
       surface: AppColors.bg,
-      background: AppColors.bg,
     ),
     textTheme: GoogleFonts.interTextTheme(base.textTheme).apply(
       bodyColor: Colors.white,

@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,18 +6,21 @@ import 'data/mock_dramas.dart';
 import 'providers/app_state.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(create: (_) => AppState(), child: const ShortDramaApp()));
+  runApp(const ShortDramaApp());
 }
 
 class ShortDramaApp extends StatelessWidget {
   const ShortDramaApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Short Drama',
-      debugShowCheckedModeBanner: false,
-      theme: buildTheme(),
-      home: const MainShell(),
+    return ChangeNotifierProvider(
+      create: (_) => AppState(),
+      child: MaterialApp(
+        title: 'Short Drama',
+        debugShowCheckedModeBanner: false,
+        theme: buildTheme(),
+        home: const MainShell(),
+      ),
     );
   }
 }
@@ -45,7 +47,7 @@ class MainShell extends StatelessWidget {
         child: NavigationBarTheme(
           data: NavigationBarThemeData(
             backgroundColor: Colors.transparent,
-            indicatorColor: AppColors.gold.withOpacity(0.18),
+            indicatorColor: AppColors.gold.withValues(alpha: 0.18),
             labelTextStyle: WidgetStateProperty.resolveWith((states) {
               if (states.contains(WidgetState.selected)) {
                 return GoogleFonts.inter(color: AppColors.gold, fontSize: 11, fontWeight: FontWeight.w600);
@@ -153,9 +155,9 @@ class _HomeFeedScreenState extends State<HomeFeedScreen> with SingleTickerProvid
                         return Container(
                           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.08),
+                            color: Colors.white.withValues(alpha: 0.08),
                             borderRadius: BorderRadius.circular(20),
-                            border: Border.all(color: Colors.white.withOpacity(0.12)),
+                            border: Border.all(color: Colors.white.withValues(alpha: 0.12)),
                           ),
                           child: Row(children: [
                             const Icon(Icons.monetization_on, color: AppColors.gold, size: 16),
@@ -184,9 +186,9 @@ class _HomeFeedScreenState extends State<HomeFeedScreen> with SingleTickerProvid
                 Container(
                   padding: const EdgeInsets.all(4),
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.35),
+                    color: Colors.black.withValues(alpha: 0.35),
                     borderRadius: BorderRadius.circular(24),
-                    border: Border.all(color: Colors.white.withOpacity(0.08)),
+                    border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -290,9 +292,9 @@ class _DramaFeedCardState extends State<DramaFeedCard> {
                 width: 72,
                 height: 72,
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.45),
+                  color: Colors.black.withValues(alpha: 0.45),
                   shape: BoxShape.circle,
-                  border: Border.all(color: Colors.white.withOpacity(0.18)),
+                  border: Border.all(color: Colors.white.withValues(alpha: 0.18)),
                 ),
                 child: const Icon(Icons.play_arrow_rounded, color: Colors.white, size: 42),
               ),
@@ -307,9 +309,9 @@ class _DramaFeedCardState extends State<DramaFeedCard> {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.45),
+                  color: Colors.black.withValues(alpha: 0.45),
                   borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: Colors.white.withOpacity(0.12)),
+                  border: Border.all(color: Colors.white.withValues(alpha: 0.12)),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -343,9 +345,9 @@ class _DramaFeedCardState extends State<DramaFeedCard> {
                           children: d.tags.map((t) => Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                                 decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.12),
+                                  color: Colors.white.withValues(alpha: 0.12),
                                   borderRadius: BorderRadius.circular(20),
-                                  border: Border.all(color: Colors.white.withOpacity(0.14)),
+                                  border: Border.all(color: Colors.white.withValues(alpha: 0.14)),
                                 ),
                                 child: Text(t, style: GoogleFonts.inter(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w500)),
                               )).toList(),
@@ -353,7 +355,7 @@ class _DramaFeedCardState extends State<DramaFeedCard> {
                         const SizedBox(height: 10),
                         Text(d.title, style: GoogleFonts.inter(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w800, height: 1.1)),
                         const SizedBox(height: 6),
-                        Text(d.description, maxLines: 2, overflow: TextOverflow.ellipsis, style: GoogleFonts.inter(color: Colors.white.withOpacity(0.82), fontSize: 13, height: 1.4)),
+                        Text(d.description, maxLines: 2, overflow: TextOverflow.ellipsis, style: GoogleFonts.inter(color: Colors.white.withValues(alpha: 0.82), fontSize: 13, height: 1.4)),
                         const SizedBox(height: 14),
                         Row(
                           children: [
@@ -366,7 +368,7 @@ class _DramaFeedCardState extends State<DramaFeedCard> {
                                 decoration: BoxDecoration(
                                   gradient: const LinearGradient(colors: [AppColors.gold, Color(0xFFF59E0B)]),
                                   borderRadius: BorderRadius.circular(24),
-                                  boxShadow: [BoxShadow(color: AppColors.gold.withOpacity(0.35), blurRadius: 12, offset: const Offset(0, 4))],
+                                  boxShadow: [BoxShadow(color: AppColors.gold.withValues(alpha: 0.35), blurRadius: 12, offset: const Offset(0, 4))],
                                 ),
                                 child: Row(children: [
                                   const Icon(Icons.play_arrow_rounded, color: Colors.black, size: 20),
@@ -383,9 +385,9 @@ class _DramaFeedCardState extends State<DramaFeedCard> {
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
                                   decoration: BoxDecoration(
-                                    color: fav ? AppColors.rose : Colors.white.withOpacity(0.12),
+                                    color: fav ? AppColors.rose : Colors.white.withValues(alpha: 0.12),
                                     borderRadius: BorderRadius.circular(24),
-                                    border: Border.all(color: fav ? AppColors.rose : Colors.white.withOpacity(0.16)),
+                                    border: Border.all(color: fav ? AppColors.rose : Colors.white.withValues(alpha: 0.16)),
                                   ),
                                   child: Row(children: [
                                     Icon(fav ? Icons.bookmark : Icons.bookmark_border, color: Colors.white, size: 18),
@@ -404,7 +406,7 @@ class _DramaFeedCardState extends State<DramaFeedCard> {
                           child: LinearProgressIndicator(
                             value: progress,
                             minHeight: 3,
-                            backgroundColor: Colors.white.withOpacity(0.18),
+                            backgroundColor: Colors.white.withValues(alpha: 0.18),
                             valueColor: const AlwaysStoppedAnimation(AppColors.gold),
                           ),
                         ),
@@ -447,15 +449,15 @@ class _DramaFeedCardState extends State<DramaFeedCard> {
                           height: 52,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(16),
-                            border: Border.all(color: AppColors.gold.withOpacity(0.7), width: 2),
+                            border: Border.all(color: AppColors.gold.withValues(alpha: 0.7), width: 2),
                             gradient: LinearGradient(colors: d.gradient),
-                            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.4), blurRadius: 8)],
+                            boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.4), blurRadius: 8)],
                           ),
                           child: Stack(
                             alignment: Alignment.center,
                             children: [
                               const Icon(Icons.menu, color: Colors.white, size: 18),
-                              Positioned(bottom: 4, child: Container(padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2), decoration: BoxDecoration(color: Colors.black.withOpacity(0.65), borderRadius: BorderRadius.circular(8)), child: Text('${d.episodes} EP', style: GoogleFonts.inter(color: Colors.white, fontSize: 8, fontWeight: FontWeight.w700)))),
+                              Positioned(bottom: 4, child: Container(padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2), decoration: BoxDecoration(color: Colors.black.withValues(alpha: 0.65), borderRadius: BorderRadius.circular(8)), child: Text('${d.episodes} EP', style: GoogleFonts.inter(color: Colors.white, fontSize: 8, fontWeight: FontWeight.w700)))),
                             ],
                           ),
                         ),
@@ -489,10 +491,10 @@ class _ActionButton extends StatelessWidget {
           width: 52,
           height: 52,
           decoration: BoxDecoration(
-            color: isActive ? activeColor : Colors.white.withOpacity(0.10),
+            color: isActive ? activeColor : Colors.white.withValues(alpha: 0.10),
             shape: BoxShape.circle,
-            border: Border.all(color: isActive ? activeColor : Colors.white.withOpacity(0.14)),
-            boxShadow: isActive ? [BoxShadow(color: activeColor.withOpacity(0.4), blurRadius: 10)] : null,
+            border: Border.all(color: isActive ? activeColor : Colors.white.withValues(alpha: 0.14)),
+            boxShadow: isActive ? [BoxShadow(color: activeColor.withValues(alpha: 0.4), blurRadius: 10)] : null,
           ),
           child: Icon(icon, color: Colors.white, size: 22),
         ),
@@ -532,7 +534,7 @@ class _SearchScreenState extends State<SearchScreen> {
               child: Row(children: [
                 Expanded(
                   child: Container(
-                    decoration: BoxDecoration(color: AppColors.card, borderRadius: BorderRadius.circular(16), border: Border.all(color: Colors.white.withOpacity(0.08))),
+                    decoration: BoxDecoration(color: AppColors.card, borderRadius: BorderRadius.circular(16), border: Border.all(color: Colors.white.withValues(alpha: 0.08))),
                     child: TextField(
                       onChanged: (v) => setState(() => query = v),
                       style: GoogleFonts.inter(color: Colors.white, fontSize: 14),
@@ -572,7 +574,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       decoration: BoxDecoration(
                         color: sel ? AppColors.gold : AppColors.card,
                         borderRadius: BorderRadius.circular(20),
-                        border: Border.all(color: sel ? AppColors.gold : Colors.white.withOpacity(0.08)),
+                        border: Border.all(color: sel ? AppColors.gold : Colors.white.withValues(alpha: 0.08)),
                       ),
                       child: Text(c, style: GoogleFonts.inter(color: sel ? Colors.black : Colors.white70, fontWeight: FontWeight.w600, fontSize: 13)),
                     ),
@@ -606,7 +608,7 @@ class _PosterCard extends StatelessWidget {
     return GestureDetector(
       onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => PlayerScreen(drama: drama))),
       child: Container(
-        decoration: BoxDecoration(color: AppColors.card, borderRadius: BorderRadius.circular(20), border: Border.all(color: Colors.white.withOpacity(0.06))),
+        decoration: BoxDecoration(color: AppColors.card, borderRadius: BorderRadius.circular(20), border: Border.all(color: Colors.white.withValues(alpha: 0.06))),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Expanded(
             child: Container(
@@ -615,11 +617,11 @@ class _PosterCard extends StatelessWidget {
                 gradient: LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight, colors: drama.gradient),
               ),
               child: Stack(children: [
-                Positioned(top: 10, left: 10, child: Container(padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4), decoration: BoxDecoration(color: Colors.black.withOpacity(0.55), borderRadius: BorderRadius.circular(20), border: Border.all(color: Colors.white.withOpacity(0.12))), child: Row(children: [const Icon(Icons.star, color: AppColors.gold, size: 12), const SizedBox(width: 3), Text('${drama.rating}', style: GoogleFonts.inter(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w700))]))),
+                Positioned(top: 10, left: 10, child: Container(padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4), decoration: BoxDecoration(color: Colors.black.withValues(alpha: 0.55), borderRadius: BorderRadius.circular(20), border: Border.all(color: Colors.white.withValues(alpha: 0.12))), child: Row(children: [const Icon(Icons.star, color: AppColors.gold, size: 12), const SizedBox(width: 3), Text('${drama.rating}', style: GoogleFonts.inter(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w700))]))),
                 if (drama.isTrending)
                   Positioned(top: 10, right: 10, child: Container(padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3), decoration: BoxDecoration(color: AppColors.rose, borderRadius: BorderRadius.circular(20)), child: Text('HOT', style: GoogleFonts.inter(color: Colors.white, fontSize: 9, fontWeight: FontWeight.w800)))),
-                Center(child: Icon(Icons.play_circle_outline, color: Colors.white.withOpacity(0.92), size: 44)),
-                Positioned(bottom: 8, right: 8, child: Container(padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3), decoration: BoxDecoration(color: Colors.black.withOpacity(0.55), borderRadius: BorderRadius.circular(8)), child: Text('${drama.episodes} EP', style: GoogleFonts.inter(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w600)))),
+                Center(child: Icon(Icons.play_circle_outline, color: Colors.white.withValues(alpha: 0.92), size: 44)),
+                Positioned(bottom: 8, right: 8, child: Container(padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3), decoration: BoxDecoration(color: Colors.black.withValues(alpha: 0.55), borderRadius: BorderRadius.circular(8)), child: Text('${drama.episodes} EP', style: GoogleFonts.inter(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w600)))),
               ]),
             ),
           ),
@@ -658,12 +660,12 @@ class MyListScreen extends StatelessWidget {
             child: Row(children: [
               Text('My List', style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 22)),
               const SizedBox(width: 8),
-              Container(padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4), decoration: BoxDecoration(color: AppColors.gold.withOpacity(0.15), borderRadius: BorderRadius.circular(20), border: Border.all(color: AppColors.gold.withOpacity(0.35))), child: Text('${favs.length} titles', style: GoogleFonts.inter(color: AppColors.gold, fontSize: 12, fontWeight: FontWeight.w700))),
+              Container(padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4), decoration: BoxDecoration(color: AppColors.gold.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(20), border: Border.all(color: AppColors.gold.withValues(alpha: 0.35))), child: Text('${favs.length} titles', style: GoogleFonts.inter(color: AppColors.gold, fontSize: 12, fontWeight: FontWeight.w700))),
               const Spacer(),
               if (favs.isNotEmpty)
                 GestureDetector(
                   onTap: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Sort & Filter — soon', style: GoogleFonts.inter()), backgroundColor: AppColors.card)),
-                  child: Container(padding: const EdgeInsets.all(8), decoration: BoxDecoration(color: AppColors.card, borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.white.withOpacity(0.08))), child: const Icon(Icons.swap_vert, color: Colors.white70, size: 18)),
+                  child: Container(padding: const EdgeInsets.all(8), decoration: BoxDecoration(color: AppColors.card, borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.white.withValues(alpha: 0.08))), child: const Icon(Icons.swap_vert, color: Colors.white70, size: 18)),
                 ),
             ]),
           ),
@@ -671,7 +673,7 @@ class MyListScreen extends StatelessWidget {
             Expanded(
               child: Center(
                 child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Container(width: 88, height: 88, decoration: BoxDecoration(color: AppColors.card, shape: BoxShape.circle, border: Border.all(color: Colors.white.withOpacity(0.08))), child: const Icon(Icons.bookmark_border, color: AppColors.textDim, size: 36)),
+                  Container(width: 88, height: 88, decoration: BoxDecoration(color: AppColors.card, shape: BoxShape.circle, border: Border.all(color: Colors.white.withValues(alpha: 0.08))), child: const Icon(Icons.bookmark_border, color: AppColors.textDim, size: 36)),
                   const SizedBox(height: 16),
                   Text('Your list is empty', style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 16)),
                   const SizedBox(height: 6),
@@ -699,7 +701,7 @@ class MyListScreen extends StatelessWidget {
                       left: 8,
                       child: GestureDetector(
                         onTap: () => context.read<AppState>().toggleFav(d.id),
-                        child: Container(padding: const EdgeInsets.all(6), decoration: BoxDecoration(color: AppColors.rose, shape: BoxShape.circle, boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.3), blurRadius: 6)]), child: const Icon(Icons.close, color: Colors.white, size: 14)),
+                        child: Container(padding: const EdgeInsets.all(6), decoration: BoxDecoration(color: AppColors.rose, shape: BoxShape.circle, boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.3), blurRadius: 6)]), child: const Icon(Icons.close, color: Colors.white, size: 14)),
                       ),
                     ),
                   ]);
@@ -733,7 +735,7 @@ class ProfileScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   gradient: const LinearGradient(colors: [AppColors.gold, Color(0xFFF59E0B)]),
-                  border: Border.all(color: Colors.white.withOpacity(0.2), width: 2),
+                  border: Border.all(color: Colors.white.withValues(alpha: 0.2), width: 2),
                 ),
                 child: const Icon(Icons.person, color: Colors.black, size: 32),
               ),
@@ -747,7 +749,7 @@ class ProfileScreen extends StatelessWidget {
                   Container(padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4), decoration: BoxDecoration(gradient: const LinearGradient(colors: [AppColors.gold, Color(0xFFF59E0B)]), borderRadius: BorderRadius.circular(20)), child: Text('VIP 2  •  Premium', style: GoogleFonts.inter(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 11))),
                 ]),
               ),
-              Container(padding: const EdgeInsets.all(10), decoration: BoxDecoration(color: AppColors.card, borderRadius: BorderRadius.circular(14), border: Border.all(color: Colors.white.withOpacity(0.08))), child: const Icon(Icons.settings_outlined, color: Colors.white70, size: 20)),
+              Container(padding: const EdgeInsets.all(10), decoration: BoxDecoration(color: AppColors.card, borderRadius: BorderRadius.circular(14), border: Border.all(color: Colors.white.withValues(alpha: 0.08))), child: const Icon(Icons.settings_outlined, color: Colors.white70, size: 20)),
             ]),
             const SizedBox(height: 18),
             // coins card glassmorphism 2xl
@@ -756,11 +758,11 @@ class ProfileScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(24),
                 gradient: LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight, colors: [const Color(0xFF1E1E2E), const Color(0xFF252538)]),
-                border: Border.all(color: Colors.white.withOpacity(0.08)),
-                boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.4), blurRadius: 16, offset: const Offset(0, 8))],
+                border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
+                boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.4), blurRadius: 16, offset: const Offset(0, 8))],
               ),
               child: Row(children: [
-                Container(width: 48, height: 48, decoration: BoxDecoration(color: AppColors.gold.withOpacity(0.18), shape: BoxShape.circle, border: Border.all(color: AppColors.gold.withOpacity(0.35))), child: const Icon(Icons.monetization_on, color: AppColors.gold, size: 26)),
+                Container(width: 48, height: 48, decoration: BoxDecoration(color: AppColors.gold.withValues(alpha: 0.18), shape: BoxShape.circle, border: Border.all(color: AppColors.gold.withValues(alpha: 0.35))), child: const Icon(Icons.monetization_on, color: AppColors.gold, size: 26)),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -785,7 +787,7 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(height: 10),
             Container(
               padding: const EdgeInsets.all(14),
-              decoration: BoxDecoration(color: AppColors.rose.withOpacity(0.08), borderRadius: BorderRadius.circular(16), border: Border.all(color: AppColors.rose.withOpacity(0.18))),
+              decoration: BoxDecoration(color: AppColors.rose.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(16), border: Border.all(color: AppColors.rose.withValues(alpha: 0.18))),
               child: Row(children: [
                 const Icon(Icons.card_giftcard, color: AppColors.rose, size: 18),
                 const SizedBox(width: 8),
@@ -808,7 +810,7 @@ class ProfileScreen extends StatelessWidget {
                     return GestureDetector(
                       onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => PlayerScreen(drama: d))),
                       child: Column(children: [
-                        Container(width: 78, height: 78, decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), gradient: LinearGradient(colors: d.gradient), border: Border.all(color: Colors.white.withOpacity(0.08))), child: const Icon(Icons.play_circle_outline, color: Colors.white, size: 26)),
+                        Container(width: 78, height: 78, decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), gradient: LinearGradient(colors: d.gradient), border: Border.all(color: Colors.white.withValues(alpha: 0.08))), child: const Icon(Icons.play_circle_outline, color: Colors.white, size: 26)),
                         const SizedBox(height: 6),
                         SizedBox(width: 78, child: Text(d.title, maxLines: 2, overflow: TextOverflow.ellipsis, textAlign: TextAlign.center, style: GoogleFonts.inter(color: Colors.white70, fontSize: 11, fontWeight: FontWeight.w500))),
                       ]),
@@ -823,7 +825,7 @@ class ProfileScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(24),
                 gradient: const LinearGradient(colors: [Color(0xFF1A1A2E), Color(0xFF2D1B2D)]),
-                border: Border.all(color: AppColors.gold.withOpacity(0.18)),
+                border: Border.all(color: AppColors.gold.withValues(alpha: 0.18)),
               ),
               child: Row(children: [
                 Expanded(
@@ -857,9 +859,9 @@ class ProfileScreen extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
-      decoration: BoxDecoration(color: AppColors.card, borderRadius: BorderRadius.circular(16), border: Border.all(color: Colors.white.withOpacity(0.06))),
+      decoration: BoxDecoration(color: AppColors.card, borderRadius: BorderRadius.circular(16), border: Border.all(color: Colors.white.withValues(alpha: 0.06))),
       child: Row(children: [
-        Container(width: 40, height: 40, decoration: BoxDecoration(color: isDestructive ? AppColors.rose.withOpacity(0.12) : Colors.white.withOpacity(0.06), borderRadius: BorderRadius.circular(12)), child: Icon(icon, color: isDestructive ? AppColors.rose : Colors.white70, size: 20)),
+        Container(width: 40, height: 40, decoration: BoxDecoration(color: isDestructive ? AppColors.rose.withValues(alpha: 0.12) : Colors.white.withValues(alpha: 0.06), borderRadius: BorderRadius.circular(12)), child: Icon(icon, color: isDestructive ? AppColors.rose : Colors.white70, size: 20)),
         const SizedBox(width: 12),
         Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(title, style: GoogleFonts.inter(color: isDestructive ? AppColors.rose : Colors.white, fontWeight: FontWeight.w600, fontSize: 14)), if (subtitle.isNotEmpty) Text(subtitle, style: GoogleFonts.inter(color: AppColors.textMuted, fontSize: 12))])),
         const Icon(Icons.chevron_right, color: AppColors.textDim, size: 20),
@@ -895,10 +897,10 @@ class _PlayerScreenState extends State<PlayerScreen> {
             backgroundColor: AppColors.bg,
             leading: GestureDetector(
               onTap: () => Navigator.pop(context),
-              child: Container(margin: const EdgeInsets.all(8), decoration: BoxDecoration(color: Colors.black.withOpacity(0.45), shape: BoxShape.circle, border: Border.all(color: Colors.white.withOpacity(0.12))), child: const Icon(Icons.arrow_back, color: Colors.white, size: 20)),
+              child: Container(margin: const EdgeInsets.all(8), decoration: BoxDecoration(color: Colors.black.withValues(alpha: 0.45), shape: BoxShape.circle, border: Border.all(color: Colors.white.withValues(alpha: 0.12))), child: const Icon(Icons.arrow_back, color: Colors.white, size: 20)),
             ),
             actions: [
-              Container(margin: const EdgeInsets.all(8), padding: const EdgeInsets.all(8), decoration: BoxDecoration(color: Colors.black.withOpacity(0.45), shape: BoxShape.circle, border: Border.all(color: Colors.white.withOpacity(0.12))), child: const Icon(Icons.share_outlined, color: Colors.white, size: 18)),
+              Container(margin: const EdgeInsets.all(8), padding: const EdgeInsets.all(8), decoration: BoxDecoration(color: Colors.black.withValues(alpha: 0.45), shape: BoxShape.circle, border: Border.all(color: Colors.white.withValues(alpha: 0.12))), child: const Icon(Icons.share_outlined, color: Colors.white, size: 18)),
               const SizedBox(width: 4),
             ],
             flexibleSpace: FlexibleSpaceBar(
@@ -914,7 +916,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                       child: Container(
                         width: 64,
                         height: 64,
-                        decoration: BoxDecoration(color: unlocked ? Colors.white.withOpacity(0.15) : Colors.black.withOpacity(0.55), shape: BoxShape.circle, border: Border.all(color: Colors.white.withOpacity(0.2))),
+                        decoration: BoxDecoration(color: unlocked ? Colors.white.withValues(alpha: 0.15) : Colors.black.withValues(alpha: 0.55), shape: BoxShape.circle, border: Border.all(color: Colors.white.withValues(alpha: 0.2))),
                         child: Icon(unlocked ? (isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded) : Icons.lock_rounded, color: Colors.white, size: 32),
                       ),
                     ),
@@ -936,7 +938,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                   ]),
                 ),
                 // top episodes badge
-                SafeArea(child: Padding(padding: const EdgeInsets.only(top: 56), child: Align(alignment: Alignment.topCenter, child: Container(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4), decoration: BoxDecoration(color: Colors.black.withOpacity(0.45), borderRadius: BorderRadius.circular(20), border: Border.all(color: Colors.white.withOpacity(0.12))), child: Text('DRAMA • ${d.episodes} EPISODES', style: GoogleFonts.inter(color: Colors.white70, fontSize: 10, fontWeight: FontWeight.w600, letterSpacing: 1.1)))))),
+                SafeArea(child: Padding(padding: const EdgeInsets.only(top: 56), child: Align(alignment: Alignment.topCenter, child: Container(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4), decoration: BoxDecoration(color: Colors.black.withValues(alpha: 0.45), borderRadius: BorderRadius.circular(20), border: Border.all(color: Colors.white.withValues(alpha: 0.12))), child: Text('DRAMA • ${d.episodes} EPISODES', style: GoogleFonts.inter(color: Colors.white70, fontSize: 10, fontWeight: FontWeight.w600, letterSpacing: 1.1)))))),
               ]),
             ),
           ),
@@ -945,15 +947,15 @@ class _PlayerScreenState extends State<PlayerScreen> {
               padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
               child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Row(children: [
-                  Container(padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4), decoration: BoxDecoration(color: AppColors.gold.withOpacity(0.15), borderRadius: BorderRadius.circular(8), border: Border.all(color: AppColors.gold.withOpacity(0.3))), child: Text(d.category.toUpperCase(), style: GoogleFonts.inter(color: AppColors.gold, fontWeight: FontWeight.w800, fontSize: 10, letterSpacing: 0.8))),
+                  Container(padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4), decoration: BoxDecoration(color: AppColors.gold.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(8), border: Border.all(color: AppColors.gold.withValues(alpha: 0.3))), child: Text(d.category.toUpperCase(), style: GoogleFonts.inter(color: AppColors.gold, fontWeight: FontWeight.w800, fontSize: 10, letterSpacing: 0.8))),
                   const SizedBox(width: 8),
-                  Container(padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4), decoration: BoxDecoration(color: AppColors.rose.withOpacity(0.12), borderRadius: BorderRadius.circular(8)), child: Text('BINGE-WORTHY', style: GoogleFonts.inter(color: AppColors.rose, fontWeight: FontWeight.w700, fontSize: 10))),
+                  Container(padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4), decoration: BoxDecoration(color: AppColors.rose.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(8)), child: Text('BINGE-WORTHY', style: GoogleFonts.inter(color: AppColors.rose, fontWeight: FontWeight.w700, fontSize: 10))),
                   const Spacer(),
                   Consumer<AppState>(builder: (_, s, __) {
                     final fav = s.isFav(d.id);
                     return GestureDetector(
                       onTap: () => s.toggleFav(d.id),
-                      child: Container(padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8), decoration: BoxDecoration(color: fav ? AppColors.rose : AppColors.card, borderRadius: BorderRadius.circular(20), border: Border.all(color: fav ? AppColors.rose : Colors.white.withOpacity(0.08))), child: Row(children: [Icon(fav ? Icons.bookmark : Icons.bookmark_border, color: Colors.white, size: 16), const SizedBox(width: 6), Text(fav ? 'Saved' : 'Save', style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 12))])),
+                      child: Container(padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8), decoration: BoxDecoration(color: fav ? AppColors.rose : AppColors.card, borderRadius: BorderRadius.circular(20), border: Border.all(color: fav ? AppColors.rose : Colors.white.withValues(alpha: 0.08))), child: Row(children: [Icon(fav ? Icons.bookmark : Icons.bookmark_border, color: Colors.white, size: 16), const SizedBox(width: 6), Text(fav ? 'Saved' : 'Save', style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 12))])),
                     );
                   }),
                 ]),
@@ -970,16 +972,16 @@ class _PlayerScreenState extends State<PlayerScreen> {
                   Text('• ${d.episodes} episodes', style: GoogleFonts.inter(color: AppColors.textMuted, fontSize: 12)),
                 ]),
                 const SizedBox(height: 10),
-                Text(d.description, style: GoogleFonts.inter(color: Colors.white.withOpacity(0.78), fontSize: 13, height: 1.5)),
+                Text(d.description, style: GoogleFonts.inter(color: Colors.white.withValues(alpha: 0.78), fontSize: 13, height: 1.5)),
                 const SizedBox(height: 12),
-                Wrap(spacing: 8, children: d.tags.map((t) => Container(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6), decoration: BoxDecoration(color: Colors.white.withOpacity(0.08), borderRadius: BorderRadius.circular(20), border: Border.all(color: Colors.white.withOpacity(0.08))), child: Text('# $t', style: GoogleFonts.inter(color: Colors.white70, fontSize: 12)))).toList()),
+                Wrap(spacing: 8, children: d.tags.map((t) => Container(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6), decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(20), border: Border.all(color: Colors.white.withValues(alpha: 0.08))), child: Text('# $t', style: GoogleFonts.inter(color: Colors.white70, fontSize: 12)))).toList()),
                 const SizedBox(height: 20),
                 Row(children: [
                   Text('Episodes', style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 16)),
                   const SizedBox(width: 8),
                   Text('${d.episodes} episodes', style: GoogleFonts.inter(color: AppColors.textMuted, fontSize: 12)),
                   const Spacer(),
-                  Container(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6), decoration: BoxDecoration(color: AppColors.card, borderRadius: BorderRadius.circular(20), border: Border.all(color: Colors.white.withOpacity(0.08))), child: Row(children: [const Icon(Icons.monetization_on, color: AppColors.gold, size: 14), const SizedBox(width: 4), Text('${state.coins} coins', style: GoogleFonts.inter(color: AppColors.gold, fontWeight: FontWeight.w700, fontSize: 12))])),
+                  Container(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6), decoration: BoxDecoration(color: AppColors.card, borderRadius: BorderRadius.circular(20), border: Border.all(color: Colors.white.withValues(alpha: 0.08))), child: Row(children: [const Icon(Icons.monetization_on, color: AppColors.gold, size: 14), const SizedBox(width: 4), Text('${state.coins} coins', style: GoogleFonts.inter(color: AppColors.gold, fontWeight: FontWeight.w700, fontSize: 12))])),
                 ]),
                 const SizedBox(height: 4),
                 Text('First 3 episodes free • 10 coins per episode after', style: GoogleFonts.inter(color: AppColors.textDim, fontSize: 11)),
@@ -1004,9 +1006,9 @@ class _PlayerScreenState extends State<PlayerScreen> {
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                          color: isSelected ? AppColors.gold : (isUnlocked ? AppColors.card : AppColors.card.withOpacity(0.55)),
+                          color: isSelected ? AppColors.gold : (isUnlocked ? AppColors.card : AppColors.card.withValues(alpha: 0.55)),
                           borderRadius: BorderRadius.circular(14),
-                          border: Border.all(color: isSelected ? AppColors.gold : (isUnlocked ? Colors.white.withOpacity(0.08) : Colors.white.withOpacity(0.04)), width: isSelected ? 2 : 1),
+                          border: Border.all(color: isSelected ? AppColors.gold : (isUnlocked ? Colors.white.withValues(alpha: 0.08) : Colors.white.withValues(alpha: 0.04)), width: isSelected ? 2 : 1),
                         ),
                         child: Stack(alignment: Alignment.center, children: [
                           Column(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -1017,7 +1019,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                           if (isUnlocked && ep <= 3)
                             Positioned(top: 4, right: 4, child: Container(padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2), decoration: BoxDecoration(color: const Color(0xFF10B981), borderRadius: BorderRadius.circular(6)), child: Text('FREE', style: GoogleFonts.inter(color: Colors.white, fontSize: 7, fontWeight: FontWeight.w800)))),
                           if (!isUnlocked)
-                            Positioned(top: 4, right: 4, child: Container(width: 16, height: 16, decoration: BoxDecoration(color: AppColors.gold.withOpacity(0.9), shape: BoxShape.circle), child: Center(child: Text('10', style: GoogleFonts.inter(color: Colors.black, fontSize: 8, fontWeight: FontWeight.w800))))),
+                            Positioned(top: 4, right: 4, child: Container(width: 16, height: 16, decoration: BoxDecoration(color: AppColors.gold.withValues(alpha: 0.9), shape: BoxShape.circle), child: Center(child: Text('10', style: GoogleFonts.inter(color: Colors.black, fontSize: 8, fontWeight: FontWeight.w800))))),
                         ]),
                       ),
                     );
@@ -1041,7 +1043,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                         decoration: BoxDecoration(
                           gradient: LinearGradient(colors: state.isUnlocked(d.id, selectedEp) ? [AppColors.gold, const Color(0xFFF59E0B)] : [AppColors.card, AppColors.card]),
                           borderRadius: BorderRadius.circular(16),
-                          border: Border.all(color: state.isUnlocked(d.id, selectedEp) ? Colors.transparent : Colors.white.withOpacity(0.08)),
+                          border: Border.all(color: state.isUnlocked(d.id, selectedEp) ? Colors.transparent : Colors.white.withValues(alpha: 0.08)),
                         ),
                         child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                           Icon(state.isUnlocked(d.id, selectedEp) ? Icons.play_arrow_rounded : Icons.lock_rounded, color: state.isUnlocked(d.id, selectedEp) ? Colors.black : Colors.white38, size: 20),
@@ -1056,14 +1058,14 @@ class _PlayerScreenState extends State<PlayerScreen> {
                     onTap: () {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Link copied!', style: GoogleFonts.inter()), backgroundColor: AppColors.card, behavior: SnackBarBehavior.floating, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), duration: const Duration(seconds: 1)));
                     },
-                    child: Container(width: 52, height: 52, decoration: BoxDecoration(color: AppColors.card, borderRadius: BorderRadius.circular(16), border: Border.all(color: Colors.white.withOpacity(0.08))), child: const Icon(Icons.share_rounded, color: Colors.white70, size: 20)),
+                    child: Container(width: 52, height: 52, decoration: BoxDecoration(color: AppColors.card, borderRadius: BorderRadius.circular(16), border: Border.all(color: Colors.white.withValues(alpha: 0.08))), child: const Icon(Icons.share_rounded, color: Colors.white70, size: 20)),
                   ),
                   const SizedBox(width: 10),
                   Consumer<AppState>(builder: (_, s, __) {
                     final liked = s.isLiked(d.id);
                     return GestureDetector(
                       onTap: () => s.toggleLike(d.id),
-                      child: Container(width: 52, height: 52, decoration: BoxDecoration(color: liked ? AppColors.rose : AppColors.card, borderRadius: BorderRadius.circular(16), border: Border.all(color: liked ? AppColors.rose : Colors.white.withOpacity(0.08))), child: Icon(liked ? Icons.favorite : Icons.favorite_border, color: Colors.white, size: 20)),
+                      child: Container(width: 52, height: 52, decoration: BoxDecoration(color: liked ? AppColors.rose : AppColors.card, borderRadius: BorderRadius.circular(16), border: Border.all(color: liked ? AppColors.rose : Colors.white.withValues(alpha: 0.08))), child: Icon(liked ? Icons.favorite : Icons.favorite_border, color: Colors.white, size: 20)),
                     );
                   }),
                 ]),
@@ -1086,7 +1088,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
         child: Column(mainAxisSize: MainAxisSize.min, children: [
           Container(width: 40, height: 4, decoration: BoxDecoration(color: Colors.white24, borderRadius: BorderRadius.circular(4))),
           const SizedBox(height: 16),
-          Container(width: 56, height: 56, decoration: BoxDecoration(color: AppColors.gold.withOpacity(0.15), shape: BoxShape.circle, border: Border.all(color: AppColors.gold.withOpacity(0.3))), child: const Icon(Icons.lock_rounded, color: AppColors.gold, size: 28)),
+          Container(width: 56, height: 56, decoration: BoxDecoration(color: AppColors.gold.withValues(alpha: 0.15), shape: BoxShape.circle, border: Border.all(color: AppColors.gold.withValues(alpha: 0.3))), child: const Icon(Icons.lock_rounded, color: AppColors.gold, size: 28)),
           const SizedBox(height: 12),
           Text('Unlock Episode $ep', style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 18)),
           const SizedBox(height: 6),
@@ -1094,12 +1096,12 @@ class _PlayerScreenState extends State<PlayerScreen> {
           const SizedBox(height: 16),
           Container(
             padding: const EdgeInsets.all(14),
-            decoration: BoxDecoration(color: Colors.white.withOpacity(0.06), borderRadius: BorderRadius.circular(16), border: Border.all(color: Colors.white.withOpacity(0.08))),
+            decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.06), borderRadius: BorderRadius.circular(16), border: Border.all(color: Colors.white.withValues(alpha: 0.08))),
             child: Row(children: [
               Container(width: 44, height: 44, decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), gradient: LinearGradient(colors: d.gradient)), child: const Icon(Icons.play_circle_outline, color: Colors.white, size: 22)),
               const SizedBox(width: 12),
               Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(d.title, maxLines: 1, overflow: TextOverflow.ellipsis, style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 13)), Text('Episode $ep  •  6:20', style: GoogleFonts.inter(color: AppColors.textMuted, fontSize: 12))])),
-              Container(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6), decoration: BoxDecoration(color: AppColors.gold.withOpacity(0.15), borderRadius: BorderRadius.circular(20), border: Border.all(color: AppColors.gold.withOpacity(0.3))), child: Row(children: [const Icon(Icons.monetization_on, color: AppColors.gold, size: 16), const SizedBox(width: 4), Text('10', style: GoogleFonts.inter(color: AppColors.gold, fontWeight: FontWeight.w800))])),
+              Container(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6), decoration: BoxDecoration(color: AppColors.gold.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(20), border: Border.all(color: AppColors.gold.withValues(alpha: 0.3))), child: Row(children: [const Icon(Icons.monetization_on, color: AppColors.gold, size: 16), const SizedBox(width: 4), Text('10', style: GoogleFonts.inter(color: AppColors.gold, fontWeight: FontWeight.w800))])),
             ]),
           ),
           const SizedBox(height: 16),
@@ -1109,7 +1111,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
           ]),
           const SizedBox(height: 16),
           Row(children: [
-            Expanded(child: GestureDetector(onTap: () => Navigator.pop(context), child: Container(padding: const EdgeInsets.symmetric(vertical: 14), decoration: BoxDecoration(color: Colors.white.withOpacity(0.08), borderRadius: BorderRadius.circular(16)), child: Center(child: Text('Cancel', style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w600)))))),
+            Expanded(child: GestureDetector(onTap: () => Navigator.pop(context), child: Container(padding: const EdgeInsets.symmetric(vertical: 14), decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(16)), child: Center(child: Text('Cancel', style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w600)))))),
             const SizedBox(width: 12),
             Expanded(
               child: GestureDetector(
