@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AppColors {
   static const bg = Color(0xFF0A0A12);
@@ -24,17 +23,17 @@ ThemeData buildTheme() {
       primary: AppColors.gold,
       secondary: AppColors.rose,
       surface: AppColors.bg,
-      background: AppColors.bg,
     ),
-    textTheme: GoogleFonts.interTextTheme(base.textTheme).apply(
+    textTheme: base.textTheme.apply(
       bodyColor: Colors.white,
       displayColor: Colors.white,
+      fontFamily: 'Inter',
     ),
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       backgroundColor: Colors.transparent,
       elevation: 0,
       centerTitle: false,
-      titleTextStyle: GoogleFonts.inter(fontSize: 20, fontWeight: FontWeight.w700, color: Colors.white),
+      titleTextStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: Colors.white, fontFamily: 'Inter'),
     ),
   );
 }
